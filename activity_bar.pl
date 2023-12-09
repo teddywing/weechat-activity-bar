@@ -75,8 +75,9 @@ sub activity_bar_command_cb {
 	if ($args eq 'disable') {
 		anybar_send('hollow');
 		weechat::unhook($print_hook);
+		$print_hook = undef;
 	}
-	if ($args eq 'enable') {
+	if ($args eq 'enable' && !$print_hook) {
 		$print_hook = weechat::hook_print('', '', '', 0, 'print_cb', '');
 	}
 
