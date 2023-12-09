@@ -28,6 +28,15 @@ sub shutdown {
 
 
 weechat::hook_print('', '', '', 0, 'print_cb', '');
+weechat::hook_command(
+	'activity_bar',
+	'Activity Bar commands',
+	'[clear]',
+	'clear: change AnyBar icon to hollow',
+	'clear',
+	'activity_bar_command_cb',
+	''
+);
 
 sub print_cb {
 	my ($data, $buffer, $date, $tags, $displayed, $highlight, $prefix, $message) = @_;
@@ -51,4 +60,12 @@ sub anybar_send {
 	my ($message) = @_;
 
 	$socket->send($message);
+}
+
+sub activity_bar_command_cb {
+	my ($data, $buffer, $args) = @_;
+
+	anybar_send('hollow');
+
+	return weechat::WEECHAT_RC_OK;
 }
