@@ -27,13 +27,17 @@ sub shutdown {
 }
 
 
-weechat::hook_print('', '', '', 0, 'print_cb', '');
+my $print_hook = weechat::hook_print('', '', '', 0, 'print_cb', '');
 weechat::hook_command(
 	'activity_bar',
 	'Activity Bar commands',
-	'[clear]',
-	'clear: change AnyBar icon to hollow',
-	'clear',
+	'[clear] | [enable|disable]',
+	'clear: change AnyBar icon to hollow
+enable: enable activity notification
+disable: clear the AnyBar icon and disable activity notification',
+	'clear
+		 || enable
+		 || disable',
 	'activity_bar_command_cb',
 	''
 );
@@ -65,7 +69,16 @@ sub anybar_send {
 sub activity_bar_command_cb {
 	my ($data, $buffer, $args) = @_;
 
-	anybar_send('hollow');
+	if ($args eq 'clear') {
+		anybar_send('hollow');
+	}
+	if ($args eq 'disable') {
+		anybar_send('hollow');
+		weechat::unhook($print_hook);
+	}
+	if ($args eq 'enable') {
+		$print_hook = weechat::hook_print('', '', '', 0, 'print_cb', '');
+	}
 
 	return weechat::WEECHAT_RC_OK;
 }
