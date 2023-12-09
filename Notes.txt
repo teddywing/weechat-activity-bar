@@ -1,0 +1,10 @@
+https://www.chunkhang.com/blog/fixing-focus-events-in-weechat
+https://www.chiark.greenend.org.uk/doc/weechat-doc/html/weechat_faq.en.html#terminal_focus
+
+/set weechat.startup.command_after_plugins "/print -stdout \033[?1004h\n"
+/set weechat.look.key_bind_safe off
+/key bind meta2-I /activity_bar clear
+/trigger add reset_focus signal "quit" "" "" "/print -stdout \033[?1004l\n"
+
+/key bind meta2-I /activity_bar disable
+/key bind meta2-O /activity_bar enable
