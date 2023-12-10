@@ -5,6 +5,8 @@ A [WeeChat] plugin that changes the [AnyBar] menu bar colour when there is
 activity in buffers. This allows you to see when there are new messages when
 WeeChat is not in the foreground.
 
+![Demo](./Demo.gif)
+
 
 [WeeChat]: https://weechat.org/
 [AnyBar]: https://github.com/tonsky/AnyBar
