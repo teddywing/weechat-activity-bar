@@ -32,8 +32,18 @@ weechat::hook_command(
 	'activity_bar',
 	'Activity Bar commands',
 	'[clear] | [enable|disable]',
-	'clear: change AnyBar icon to hollow
-enable: enable activity notification
+	'To disable activity notifications when WeeChat is focused, turn on terminal focus events:
+
+    /set weechat.startup.command_after_plugins "/print -stdout \033[?1004h\n"
+    /trigger add reset_focus signal "quit" "" "" "/print -stdout \033[?1004l\n"
+
+Then disable activity_bar on focus, and enable it on unfocus:
+
+    /key bind meta2-I /activity_bar disable
+    /key bind meta2-O /activity_bar enable
+
+  clear: change AnyBar icon to hollow
+ enable: enable activity notification
 disable: clear the AnyBar icon and disable activity notification',
 	'clear
 		 || enable
