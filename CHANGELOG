@@ -1,0 +1,16 @@
+CHANGELOG
+=========
+
+v1.1 (2023-10-12):
+	Changes:
+
+	* Don't show activity for messages below their buffer's notify level.
+	* Change regular message activity colour from orange to blue.
+	* Change private message activity colour from blue to orange.
+	* Don't change the existing AnyBar colour if a lower priority message comes
+	  in.
+
+v1.0 (2023-10-10):
+	First public release.
+
+ vim:tw=80:comments=:fo+=n:formatlistpat=^\\s*\\*\\s*
