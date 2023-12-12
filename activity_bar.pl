@@ -43,6 +43,17 @@ sub shutdown {
 }
 
 
+# Map colours to priority levels. Higher number is higher priority.
+my %color_priorities = (
+	'hollow' => 0,
+	'blue' => 1,
+	'purple' => 2,
+	'orange' => 3,
+);
+
+# Store the most recent colour set to AnyBar. Default to 'hollow'.
+my $anybar_last_color = 'hollow';
+
 my $print_hook = weechat::hook_print('', '', '', 0, 'print_cb', '');
 weechat::hook_command(
 	'activity_bar',
@@ -91,6 +102,17 @@ sub print_cb {
 
 sub anybar_send {
 	my ($message) = @_;
+
+	if (
+		$message ne 'hollow'
+
+		# If the current priority is lower than the previous colour.
+		&& $color_priorities{$message} < $color_priorities{$anybar_last_color}
+	) {
+		return;
+	}
+
+	$anybar_last_color = $message;
 
 	$socket->send($message);
 }
