@@ -72,6 +72,7 @@ sub print_cb {
 	my ($data, $buffer, $date, $tags, $displayed, $highlight, $prefix, $message) = @_;
 
 	my $buffer_type = weechat::buffer_get_string($buffer, 'localvar_type');
+	my $buffer_notify = weechat::buffer_get_integer($buffer, 'notify');
 
 	if ($buffer_type eq 'private') {
 		anybar_send('blue');
@@ -79,7 +80,9 @@ sub print_cb {
 	elsif ($highlight == 1) {
 		anybar_send('purple');
 	}
-	else {
+
+	# Notify about regular messages if the buffer's `notify` property allows it.
+	elsif ($buffer_notify > 1) {
 		anybar_send('orange');
 	}
 
