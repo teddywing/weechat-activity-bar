@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+v1.2 (2023-10-15):
+	Changes:
+
+	* Don't show activity for messages in the 'core.weechat' buffer.
+
 v1.1 (2023-10-12):
 	Changes:
 
