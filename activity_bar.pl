@@ -22,7 +22,7 @@ use IO::Socket::INET;
 weechat::register(
 	'activity_bar',
 	'Teddy Wing',
-	'1.2',
+	'1.3',
 	'GPL-3.0-or-later',
 	'Monitor activity in all buffers and update AnyBar',
 	'shutdown',
