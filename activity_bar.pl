@@ -86,6 +86,11 @@ sub print_cb {
 	my $buffer_notify = weechat::buffer_get_integer($buffer, 'notify');
 	my $buffer_full_name = weechat::buffer_get_string($buffer, 'full_name');
 
+	# Don't notify about messages in the WeeChat core buffer.
+	if ($buffer_full_name eq 'core.weechat') {
+		return weechat::WEECHAT_RC_OK;
+	}
+
 	if ($buffer_type eq 'private') {
 		anybar_send('orange');
 	}
@@ -94,11 +99,8 @@ sub print_cb {
 	}
 
 	# Notify about regular messages if the buffer's `notify` property allows
-	# it. Don't notify about messages in the WeeChat core buffer.
-	elsif (
-		$buffer_notify > 1
-		&& $buffer_full_name ne 'core.weechat'
-	) {
+	# it.
+	elsif ($buffer_notify > 1) {
 		anybar_send('blue');
 	}
 
