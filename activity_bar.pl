@@ -91,6 +91,11 @@ sub print_cb {
 		return weechat::WEECHAT_RC_OK;
 	}
 
+	# Don't notify about messages not added to the hotlist.
+	if ($tags =~ /\bnotify_none\b/) {
+		return weechat::WEECHAT_RC_OK;
+	}
+
 	if ($buffer_type eq 'private') {
 		anybar_send('orange');
 	}
