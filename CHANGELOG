@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+v1.4 (2024-09-24):
+	Fixes:
+
+	* Don't show activity for messages with tag 'notify_none'.
+
 v1.3 (2024-02-02):
 	Fixes:
 
